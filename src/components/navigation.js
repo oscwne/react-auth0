@@ -10,9 +10,24 @@ class Navigation extends Component {
           <li>
             <Link to="/">Home</Link>
           </li>
+          {auth.isAuthenticated() ? (
+            <li>
+              <Link to="/profile">Profile</Link>{' '}
+            </li>
+          ) : null}
           <li>
-            <Link to="/profile">Profile</Link>{' '}
+            <Link to="/public">Public</Link>{' '}
           </li>
+          {auth.isAuthenticated() ? (
+            <li>
+              <Link to="/private">Private</Link>
+            </li>
+          ) : null}
+          {auth.isAuthenticated() && auth.userHasScopes(['read:courses']) ? (
+            <li>
+              <Link to="/courses">Courses</Link>
+            </li>
+          ) : null}
           <li>
             <button onClick={auth.isAuthenticated() ? auth.logout : auth.login}>
               {auth.isAuthenticated() ? 'Log Out' : 'Log In'}

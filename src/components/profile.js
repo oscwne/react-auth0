@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import auth from '../Auth';
 
 class Profile extends Component {
   state = {
@@ -12,7 +11,9 @@ class Profile extends Component {
   }
 
   loadUserProfile = () => {
-    auth.getProfile((profile, error) => this.setState({ error, profile }));
+    this.props.auth.getProfile((profile, error) =>
+      this.setState({ error, profile })
+    );
   };
 
   render() {
